@@ -1,211 +1,183 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Report Semanal — DRA Laura | 07–13 Jun</title>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Report DRA Laura | Clínica LK</title>
 <style>
-  :root{
-    --rose:#c8849b; --rose-dark:#a8536f; --rose-soft:#f6e8ee;
-    --ink:#2c2230; --muted:#897e8c; --line:#ece3ec;
-    --green:#3a9d6b; --green-bg:#e6f5ec; --amber:#c9881f; --amber-bg:#fbf2dd; --red:#c0463f; --red-bg:#fbe7e5;
-    --card:#ffffff; --bg:#faf6f8;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;padding:0 0 60px}
-  .wrap{max-width:1080px;margin:0 auto;padding:0 18px}
-  header{background:linear-gradient(135deg,var(--rose-dark),var(--rose));color:#fff;padding:34px 0 30px;margin-bottom:26px}
-  header .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:14px}
-  header h1{font-size:26px;font-weight:700;letter-spacing:-.3px}
-  header .sub{opacity:.92;font-size:14px;margin-top:4px}
-  header .period{background:rgba(255,255,255,.18);padding:7px 15px;border-radius:30px;font-size:13px;font-weight:600;white-space:nowrap}
-  .source{font-size:11.5px;color:var(--muted);text-align:center;margin:-12px 0 24px;font-style:italic}
-
-  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:30px}
-  .kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;text-align:center;box-shadow:0 1px 3px rgba(120,80,100,.05)}
-  .kpi .v{font-size:26px;font-weight:700;color:var(--rose-dark)}
-  .kpi .l{font-size:12px;color:var(--muted);margin-top:5px;text-transform:uppercase;letter-spacing:.4px}
-  .kpi.alt .v{color:var(--ink)}
-
-  h2{font-size:20px;margin:34px 0 6px;display:flex;align-items:center;gap:9px}
-  h2 .badge{font-size:12px;font-weight:600;background:var(--rose-soft);color:var(--rose-dark);padding:3px 11px;border-radius:20px}
-  .city-meta{font-size:13px;color:var(--muted);margin-bottom:14px}
-
-  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:22px;box-shadow:0 1px 3px rgba(120,80,100,.04)}
-  table{width:100%;border-collapse:collapse;font-size:14px}
-  thead th{background:var(--rose-soft);color:var(--rose-dark);text-align:right;padding:11px 14px;font-size:12px;text-transform:uppercase;letter-spacing:.3px;font-weight:600}
-  thead th:first-child{text-align:left}
-  tbody td{padding:11px 14px;text-align:right;border-top:1px solid var(--line)}
-  tbody td:first-child{text-align:left;font-weight:600}
-  tbody tr:hover{background:#fdfafb}
-  tfoot td{padding:12px 14px;text-align:right;border-top:2px solid var(--rose);font-weight:700;background:#fdf7f9}
-  tfoot td:first-child{text-align:left}
-  .pill{display:inline-block;padding:2px 9px;border-radius:20px;font-size:12px;font-weight:700}
-  .pill.g{background:var(--green-bg);color:var(--green)}
-  .pill.a{background:var(--amber-bg);color:var(--amber)}
-  .pill.r{background:var(--red-bg);color:var(--red)}
-  .note{font-size:12px;color:var(--muted);padding:10px 14px;background:#fcfafb;border-top:1px dashed var(--line)}
-
-  .branding-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  .bcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
-  .bcard h3{font-size:15px;margin-bottom:3px}
-  .bcard .obj{font-size:12px;color:var(--rose-dark);font-weight:600;margin-bottom:14px}
-  .bcard .row{display:flex;justify-content:space-between;padding:7px 0;border-top:1px solid var(--line);font-size:14px}
-  .bcard .row:first-of-type{border-top:none}
-  .bcard .row .lbl{color:var(--muted)}
-  .bcard .row .val{font-weight:600}
-  .bcard .hl{color:var(--green);font-weight:700}
-
-  .reading{background:#fff;border:1px solid var(--line);border-left:4px solid var(--rose);border-radius:12px;padding:20px 22px;margin-top:30px}
-  .reading h3{font-size:17px;margin-bottom:12px}
-  .reading ul{list-style:none;display:flex;flex-direction:column;gap:9px}
-  .reading li{font-size:14px;padding-left:22px;position:relative}
-  .reading li::before{content:"";position:absolute;left:0;top:7px;width:8px;height:8px;border-radius:50%;background:var(--rose)}
-  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
-  .minibox{border:1px solid var(--line);border-radius:10px;padding:14px 16px}
-  .minibox h4{font-size:13px;margin-bottom:9px}
-  .minibox .item{font-size:13px;display:flex;justify-content:space-between;padding:4px 0}
-  .invest{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--rose-dark),var(--rose));color:#fff;border-radius:14px;padding:18px 24px;margin-top:24px;flex-wrap:wrap;gap:8px}
-  .invest .big{font-size:24px;font-weight:700}
-  footer{text-align:center;color:var(--muted);font-size:12px;margin-top:34px}
-  @media(max-width:720px){.kpis{grid-template-columns:repeat(2,1fr)}.branding-grid,.twocol{grid-template-columns:1fr}thead th,tbody td,tfoot td{padding:9px 8px;font-size:12.5px}}
-</style>
-</head>
-<body>
-<header>
-  <div class="wrap">
-    <div>
-      <h1>DRA Laura — Report Semanal</h1>
-      <div class="sub">Clínica LK · Meta Ads · 3 cidades</div>
-    </div>
-    <div class="period">📅 07/06 a 13/06 · 2026</div>
-  </div>
-</header>
-
+:root{--rose:#c8849b;--rose-dark:#a8536f;--rose-soft:#f6e8ee;--ink:#2c2230;--muted:#897e8c;--line:#ece3ec;--green:#3a9d6b;--green-bg:#e6f5ec;--amber:#c9881f;--amber-bg:#fbf2dd;--red:#c0463f;--red-bg:#fbe7e5;--card:#fff;--bg:#faf6f8;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;padding:0 0 60px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 18px}
+header{background:linear-gradient(135deg,var(--rose-dark),var(--rose));color:#fff;padding:34px 0 30px;margin-bottom:22px}
+header .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:14px}
+header h1{font-size:26px;font-weight:700;letter-spacing:-.3px}
+header .sub{opacity:.92;font-size:14px;margin-top:4px}
+header .period{background:rgba(255,255,255,.18);padding:7px 15px;border-radius:30px;font-size:13px;font-weight:600;white-space:nowrap}
+.source{font-size:11.5px;color:var(--muted);text-align:center;margin:14px 0 18px;font-style:italic}
+.tabsbar{display:flex;gap:10px;justify-content:center;margin-bottom:26px;flex-wrap:wrap}
+.tabbtn{background:#fff;border:1px solid var(--line);color:var(--muted);padding:10px 22px;border-radius:30px;font-size:14px;font-weight:600;cursor:pointer;transition:.15s}
+.tabbtn.active{background:linear-gradient(135deg,var(--rose-dark),var(--rose));color:#fff;border-color:transparent;box-shadow:0 2px 8px rgba(168,83,111,.25)}
+.tab{display:none}.tab.active{display:block}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:30px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;text-align:center;box-shadow:0 1px 3px rgba(120,80,100,.05)}
+.kpi .v{font-size:24px;font-weight:700;color:var(--rose-dark)}
+.kpi .l{font-size:12px;color:var(--muted);margin-top:5px;text-transform:uppercase;letter-spacing:.4px}
+.kpi.alt .v{color:var(--ink)}
+h2{font-size:20px;margin:34px 0 6px;display:flex;align-items:center;gap:9px}
+h2 .badge{font-size:12px;font-weight:600;background:var(--rose-soft);color:var(--rose-dark);padding:3px 11px;border-radius:20px}
+.city-meta{font-size:13px;color:var(--muted);margin-bottom:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:22px;box-shadow:0 1px 3px rgba(120,80,100,.04)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+thead th{background:var(--rose-soft);color:var(--rose-dark);text-align:right;padding:11px 14px;font-size:12px;text-transform:uppercase;letter-spacing:.3px;font-weight:600}
+thead th:first-child{text-align:left}
+tbody td{padding:11px 14px;text-align:right;border-top:1px solid var(--line)}
+tbody td:first-child{text-align:left;font-weight:600}
+tbody tr:hover{background:#fdfafb}
+tfoot td{padding:12px 14px;text-align:right;border-top:2px solid var(--rose);font-weight:700;background:#fdf7f9}
+tfoot td:first-child{text-align:left}
+.pill{display:inline-block;padding:2px 9px;border-radius:20px;font-size:12px;font-weight:700}
+.pill.g{background:var(--green-bg);color:var(--green)}.pill.a{background:var(--amber-bg);color:var(--amber)}.pill.r{background:var(--red-bg);color:var(--red)}
+.branding-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.bcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.bcard h3{font-size:15px;margin-bottom:3px}
+.bcard .obj{font-size:12px;color:var(--rose-dark);font-weight:600;margin-bottom:14px}
+.bcard .row{display:flex;justify-content:space-between;padding:7px 0;border-top:1px solid var(--line);font-size:14px}
+.bcard .row:first-of-type{border-top:none}.bcard .row .lbl{color:var(--muted)}.bcard .row .val{font-weight:600}.bcard .hl{color:var(--green);font-weight:700}
+.reading{background:#fff;border:1px solid var(--line);border-left:4px solid var(--rose);border-radius:12px;padding:20px 22px;margin-top:30px}
+.reading h3{font-size:17px;margin-bottom:12px}
+.reading ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.reading li{font-size:14px;padding-left:22px;position:relative}
+.reading li::before{content:"";position:absolute;left:0;top:7px;width:8px;height:8px;border-radius:50%;background:var(--rose)}
+.twocol{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.minibox{border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.minibox h4{font-size:13px;margin-bottom:9px}
+.minibox .item{font-size:13px;display:flex;justify-content:space-between;padding:4px 0}
+.invest{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--rose-dark),var(--rose));color:#fff;border-radius:14px;padding:18px 24px;margin-top:24px;flex-wrap:wrap;gap:8px}
+.invest .big{font-size:24px;font-weight:700}
+footer{text-align:center;color:var(--muted);font-size:12px;margin-top:34px}
+@media(max-width:720px){.kpis{grid-template-columns:repeat(2,1fr)}.branding-grid,.twocol{grid-template-columns:1fr}thead th,tbody td,tfoot td{padding:9px 8px;font-size:12.5px}}
+</style></head><body>
+<header><div class="wrap"><div><h1>DRA Laura — Report de Tráfego</h1><div class="sub">Clínica LK · Meta Ads · 3 cidades (Arroio · Imbituba · Florianópolis)</div></div>
+<div class="period">📅 Gerado em 06/07/2026</div></div></header>
 <div class="wrap">
-  <p class="source">Fonte: Gerenciador de Anúncios da Meta (Marketing API) · atribuição da plataforma · "Conversas" = conversas iniciadas no WhatsApp</p>
-
-  <!-- KPIs -->
+<div class="tabsbar">
+  <button class="tabbtn active" data-tab="7d">📊 Últimos 7 dias · 29/06–05/07</button>
+  <button class="tabbtn" data-tab="mes">📆 Mês · 01–05/07</button>
+</div>
+<p class="source">Fonte: Gerenciador de Anúncios da Meta (Marketing API) · atribuição da plataforma · "Conversas" = conversas iniciadas no WhatsApp · períodos fechados (não incluem o dia em andamento)</p>
+<section class="tab" id="tab-7d">
   <div class="kpis">
-    <div class="kpi"><div class="v">107</div><div class="l">Conversas</div></div>
-    <div class="kpi"><div class="v">R$ 25,10</div><div class="l">Custo/conversa</div></div>
-    <div class="kpi alt"><div class="v">R$ 2.685</div><div class="l">Investido em conversa</div></div>
-    <div class="kpi alt"><div class="v">R$ 3.492</div><div class="l">Investimento total</div></div>
+    <div class="kpi"><div class="v">57</div><div class="l">Conversas</div></div>
+    <div class="kpi"><div class="v">R$ 48,25</div><div class="l">Custo/conversa</div></div>
+    <div class="kpi alt"><div class="v">R$ 2.750</div><div class="l">Investido em conversa</div></div>
+    <div class="kpi alt"><div class="v">R$ 3.450</div><div class="l">Investimento total</div></div>
   </div>
-
-  <!-- ARROIO -->
-  <h2>🏥 Arroio <span class="badge">1 procedimento</span></h2>
-  <div class="card">
-    <table>
-      <thead><tr><th>Procedimento</th><th>Conversas</th><th>Custo/conv.</th><th>Valor usado</th><th>CTR</th><th>CPM</th></tr></thead>
-      <tbody>
-        <tr><td>Otomodelação</td><td>8</td><td><span class="pill r">R$ 70,00</span></td><td>R$ 560,00</td><td>0,30%</td><td>R$ 15,46</td></tr>
-      </tbody>
-      <tfoot><tr><td>Total Arroio</td><td>8</td><td>R$ 70,00</td><td>R$ 560,00</td><td>0,30%</td><td>R$ 15,46</td></tr></tfoot>
-    </table>
-    <div class="note">⚠️ Conta mais cara da semana — roda só Otomodelação, a R$ 70/conversa e CTR baixo (0,30%).</div>
-  </div>
-
-  <!-- IMBITUBA -->
+  <h2>🏥 Arroio <span class="badge">4 procedimentos</span></h2>
+  <div class="card"><table>
+    <thead><tr><th>Procedimento</th><th>Conversas</th><th>Custo/conv.</th><th>Valor usado</th><th>CTR</th><th>CPM</th></tr></thead>
+    <tbody><tr><td>Otomodelação</td><td>0</td><td><span class="pill r">∞ (0 conv.)</span></td><td>R$ 134,32</td><td>0.22%</td><td>R$ 12,19</td></tr><tr><td>Botox</td><td>3</td><td><span class="pill a">R$ 44,84</span></td><td>R$ 134,53</td><td>0.54%</td><td>R$ 24,02</td></tr><tr><td>Bioestimulador</td><td>2</td><td><span class="pill r">R$ 131,75</span></td><td>R$ 263,50</td><td>0.65%</td><td>R$ 30,65</td></tr><tr><td>Combos</td><td>3</td><td><span class="pill a">R$ 44,12</span></td><td>R$ 132,35</td><td>0.58%</td><td>R$ 18,41</td></tr></tbody>
+    <tfoot><tr><td>Total Arroio</td><td>8</td><td>R$ 83,09</td><td>R$ 664,70</td><td>0.47%</td><td>R$ 20,51</td></tr></tfoot>
+  </table></div>
   <h2>🏥 Imbituba <span class="badge">5 procedimentos</span></h2>
-  <div class="card">
-    <table>
-      <thead><tr><th>Procedimento</th><th>Conversas</th><th>Custo/conv.</th><th>Valor usado</th><th>CTR</th><th>CPM</th></tr></thead>
-      <tbody>
-        <tr><td>Otomodelação</td><td>6</td><td><span class="pill g">R$ 29,15</span></td><td>R$ 174,92</td><td>0,19%</td><td>R$ 11,31</td></tr>
-        <tr><td>Botox</td><td>6</td><td><span class="pill g">R$ 29,17</span></td><td>R$ 174,99</td><td>0,65%</td><td>R$ 34,44</td></tr>
-        <tr><td>Bioestimulador</td><td>7</td><td><span class="pill g">R$ 24,96</span></td><td>R$ 174,72</td><td>0,75%</td><td>R$ 37,59</td></tr>
-        <tr><td>Rinomodelação</td><td>1</td><td><span class="pill r">R$ 174,67</span></td><td>R$ 174,67</td><td>0,38%</td><td>R$ 25,41</td></tr>
-        <tr><td>Combos</td><td>4</td><td><span class="pill a">R$ 55,92</span></td><td>R$ 223,69</td><td>0,35%</td><td>R$ 23,26</td></tr>
-      </tbody>
-      <tfoot><tr><td>Total Imbituba</td><td>24</td><td>R$ 38,46</td><td>R$ 922,99</td><td>0,38%</td><td>R$ 22,14</td></tr></tfoot>
-    </table>
-    <div class="note">💡 Procedimentos separados pelo conjunto de anúncio da campanha "Procedimentos". Rinomodelação gastou R$ 174 para 1 conversa — vale revisar.</div>
-  </div>
-
-  <!-- FLORIANÓPOLIS -->
-  <h2>🏥 Florianópolis <span class="badge">conta mais eficiente</span></h2>
-  <div class="city-meta">Custo/conversa de R$ 16,03 — a melhor das três cidades.</div>
-  <div class="card">
-    <table>
-      <thead><tr><th>Procedimento</th><th>Conversas</th><th>Custo/conv.</th><th>Valor usado</th><th>CTR</th><th>CPM</th></tr></thead>
-      <tbody>
-        <tr><td>Otomodelação</td><td>15</td><td><span class="pill a">R$ 24,19</span></td><td>R$ 362,82</td><td>0,30%</td><td>R$ 21,18</td></tr>
-        <tr><td>Botox</td><td>3</td><td><span class="pill a">R$ 46,63</span></td><td>R$ 139,89</td><td>0,38%</td><td>R$ 41,18</td></tr>
-        <tr><td>Bioestimulador</td><td>10</td><td><span class="pill g">R$ 16,79</span></td><td>R$ 167,92</td><td>0,69%</td><td>R$ 55,06</td></tr>
-        <tr><td>Rinomodelação</td><td>15</td><td><span class="pill g">R$ 9,33</span></td><td>R$ 139,98</td><td>0,46%</td><td>R$ 15,28</td></tr>
-        <tr><td>Preenchimento Labial</td><td>1</td><td><span class="pill r">R$ 111,85</span></td><td>R$ 111,85</td><td>0,66%</td><td>R$ 41,17</td></tr>
-        <tr><td>Combos</td><td>29</td><td><span class="pill g">R$ 3,86</span></td><td>R$ 112,00</td><td>0,67%</td><td>R$ 13,00</td></tr>
-        <tr><td>Outros (Direct)</td><td>2</td><td><span class="pill a">R$ 83,93</span></td><td>R$ 167,85</td><td>0,31%</td><td>R$ 37,20</td></tr>
-      </tbody>
-      <tfoot><tr><td>Total Florianópolis</td><td>75</td><td>R$ 16,03</td><td>R$ 1.202,31</td><td>0,45%</td><td>R$ 24,75</td></tr></tfoot>
-    </table>
-    <div class="note">🏆 Destaques: Combos (R$ 3,86) e Rinomodelação (R$ 9,33) — campanhas mais eficientes do report inteiro.</div>
-  </div>
-
-  <!-- BRANDING -->
+  <div class="card"><table>
+    <thead><tr><th>Procedimento</th><th>Conversas</th><th>Custo/conv.</th><th>Valor usado</th><th>CTR</th><th>CPM</th></tr></thead>
+    <tbody><tr><td>Otomodelação</td><td>5</td><td><span class="pill g">R$ 34,03</span></td><td>R$ 170,14</td><td>0.32%</td><td>R$ 13,13</td></tr><tr><td>Botox</td><td>7</td><td><span class="pill g">R$ 24,01</span></td><td>R$ 168,10</td><td>0.69%</td><td>R$ 38,52</td></tr><tr><td>Bioestimulador</td><td>3</td><td><span class="pill a">R$ 54,63</span></td><td>R$ 163,88</td><td>0.68%</td><td>R$ 32,61</td></tr><tr><td>Rinomodelação</td><td>1</td><td><span class="pill r">R$ 168,44</span></td><td>R$ 168,44</td><td>0.25%</td><td>R$ 22,17</td></tr><tr><td>Combos</td><td>0</td><td><span class="pill r">∞ (0 conv.)</span></td><td>R$ 220,97</td><td>0.51%</td><td>R$ 25,24</td></tr></tbody>
+    <tfoot><tr><td>Total Imbituba</td><td>16</td><td>R$ 55,72</td><td>R$ 891,53</td><td>0.44%</td><td>R$ 23,03</td></tr></tfoot>
+  </table></div>
+  <div class="city-meta" style="margin-top:-8px"></div>
+  <h2>🏥 Florianópolis <span class="badge">7 procedimentos</span></h2>
+  <div class="card"><table>
+    <thead><tr><th>Procedimento</th><th>Conversas</th><th>Custo/conv.</th><th>Valor usado</th><th>CTR</th><th>CPM</th></tr></thead>
+    <tbody><tr><td>Otomodelação</td><td>11</td><td><span class="pill g">R$ 32,48</span></td><td>R$ 357,32</td><td>0.35%</td><td>R$ 20,07</td></tr><tr><td>Botox</td><td>8</td><td><span class="pill g">R$ 16,87</span></td><td>R$ 134,95</td><td>0.83%</td><td>R$ 48,95</td></tr><tr><td>Bioestimulador</td><td>1</td><td><span class="pill r">R$ 133,85</span></td><td>R$ 133,85</td><td>0.45%</td><td>R$ 60,24</td></tr><tr><td>Rinomodelação</td><td>4</td><td><span class="pill a">R$ 50,20</span></td><td>R$ 200,79</td><td>0.47%</td><td>R$ 49,74</td></tr><tr><td>Preenchimento Labial</td><td>1</td><td><span class="pill r">R$ 105,32</span></td><td>R$ 105,32</td><td>0.30%</td><td>R$ 45,10</td></tr><tr><td>Combos</td><td>5</td><td><span class="pill a">R$ 37,46</span></td><td>R$ 187,28</td><td>0.62%</td><td>R$ 67,83</td></tr><tr><td>Outros (Neutro)</td><td>3</td><td><span class="pill g">R$ 24,75</span></td><td>R$ 74,25</td><td>0.51%</td><td>R$ 25,48</td></tr></tbody>
+    <tfoot><tr><td>Total Florianopolis</td><td>33</td><td>R$ 36,17</td><td>R$ 1.193,76</td><td>0.44%</td><td>R$ 34,28</td></tr></tfoot>
+  </table></div>
   <h2>📣 Florianópolis — Tráfego &amp; Engajamento</h2>
   <div class="city-meta">Campanhas com objetivo ≠ conversa. Medidas pela métrica certa de cada objetivo (não geram WhatsApp).</div>
-  <div class="branding-grid">
-    <div class="bcard">
-      <h3>📲 Tráfego / Visitas no Perfil</h3>
-      <div class="obj">Objetivo: Cliques no link · Perfil + 5 posts</div>
-      <div class="row"><span class="lbl">Cliques no link</span><span class="val">1.643</span></div>
-      <div class="row"><span class="lbl">Custo por clique</span><span class="val hl">R$ 0,32</span></div>
-      <div class="row"><span class="lbl">Alcance</span><span class="val">55.593</span></div>
-      <div class="row"><span class="lbl">CTR</span><span class="val">2,25%</span></div>
-      <div class="row"><span class="lbl">CPM</span><span class="val">R$ 7,28</span></div>
-      <div class="row"><span class="lbl">Valor usado</span><span class="val">R$ 531,93</span></div>
-    </div>
-    <div class="bcard">
-      <h3>❤️ Engajamento na Publicação</h3>
-      <div class="obj">Objetivo: Engajamento · CPF1</div>
-      <div class="row"><span class="lbl">Engajamentos</span><span class="val">10.560</span></div>
-      <div class="row"><span class="lbl">Custo por engajamento</span><span class="val hl">R$ 0,026</span></div>
-      <div class="row"><span class="lbl">Visualizações de vídeo</span><span class="val">10.478</span></div>
-      <div class="row"><span class="lbl">Alcance / Frequência</span><span class="val">12.769 · 3,04</span></div>
-      <div class="row"><span class="lbl">CPM</span><span class="val">R$ 7,09</span></div>
-      <div class="row"><span class="lbl">Valor usado</span><span class="val">R$ 274,89</span></div>
-    </div>
+  <div class="branding-grid"><div class="bcard"><h3>📲 Tráfego / Visitas no Perfil</h3><div class="obj">Objetivo: Cliques no link · Posts + Perfil</div>
+    <div class="row"><span class="lbl">Cliques no link</span><span class="val">1.387</span></div>
+    <div class="row"><span class="lbl">Custo por clique</span><span class="val hl">R$ 0,30</span></div>
+    <div class="row"><span class="lbl">Alcance</span><span class="val">14.940</span></div>
+    <div class="row"><span class="lbl">CTR</span><span class="val">1.88%</span></div>
+    <div class="row"><span class="lbl">CPM</span><span class="val">R$ 5,65</span></div>
+    <div class="row"><span class="lbl">Valor usado</span><span class="val">R$ 417,84</span></div></div><div class="bcard"><h3>❤️ Engajamento na Publicação</h3><div class="obj">Objetivo: Engajamento · CPF1</div>
+    <div class="row"><span class="lbl">Engajamentos</span><span class="val">4.722</span></div>
+    <div class="row"><span class="lbl">Custo por engajamento</span><span class="val hl">R$ 0,06</span></div>
+    <div class="row"><span class="lbl">Visualizações de vídeo</span><span class="val">4.562</span></div>
+    <div class="row"><span class="lbl">Alcance / Frequência</span><span class="val">15.227 · 3.05</span></div>
+    <div class="row"><span class="lbl">CPM</span><span class="val">R$ 6,06</span></div>
+    <div class="row"><span class="lbl">Valor usado</span><span class="val">R$ 281,73</span></div></div></div>
+  <div class="reading"><h3>🔎 Leitura — Últimos 7 dias</h3><ul>
+    <li><strong>Florianópolis</strong> é a conta mais eficiente (R$ 36,17/conversa); <strong>Arroio</strong> é o ponto mais fraco (R$ 83,09/conversa).</li>
+    <li>As campanhas de <strong>Tráfego e Engajamento</strong> de Floripa vão bem no objetivo delas — ~R$ 0,30/clique e ~R$ 0,06/engajamento.</li>
+    <li>⚠️ <strong>Zero conversa com verba relevante:</strong> Otomodelação · Arroio (R$ 134,32); Combos · Imbituba (R$ 220,97) — revisar criativo/público ou pausar.</li>
+  </ul>
+  <div class="twocol">
+    <div class="minibox"><h4>🟢 Mais eficientes (custo/conversa)</h4><div class="item"><span>Botox · Floripa</span><strong>R$ 16,87</strong></div><div class="item"><span>Botox · Imbituba</span><strong>R$ 24,01</strong></div><div class="item"><span>Outros (Neutro) · Floripa</span><strong>R$ 24,75</strong></div></div>
+    <div class="minibox"><h4>🔴 Mais caros (custo/conversa)</h4><div class="item"><span>Rinomodelação · Imbituba</span><strong>R$ 168,44</strong></div><div class="item"><span>Bioestimulador · Floripa</span><strong>R$ 133,85</strong></div><div class="item"><span>Bioestimulador · Arroio</span><strong>R$ 131,75</strong></div></div>
+  </div></div>
+  <div class="invest"><div><div style="font-size:13px;opacity:.9">Investimento total — Últimos 7 dias (3 contas)</div><div class="big">R$ 3.449,56</div></div>
+    <div style="text-align:right;font-size:13px;opacity:.95">Conversa: R$ 2.749,99 · 57 conversas<br>Tráfego + Engajamento: R$ 699,57</div></div>
+  </section>
+<section class="tab" id="tab-mes">
+  <div class="kpis">
+    <div class="kpi"><div class="v">38</div><div class="l">Conversas</div></div>
+    <div class="kpi"><div class="v">R$ 45,93</div><div class="l">Custo/conversa</div></div>
+    <div class="kpi alt"><div class="v">R$ 1.745</div><div class="l">Investido em conversa</div></div>
+    <div class="kpi alt"><div class="v">R$ 2.245</div><div class="l">Investimento total</div></div>
   </div>
-
-  <!-- LEITURA -->
-  <div class="reading">
-    <h3>🔎 Leitura da semana</h3>
-    <ul>
-      <li><strong>Florianópolis</strong> é a conta mais eficiente (R$ 16/conversa); <strong>Arroio</strong> é o ponto mais fraco (R$ 70/conversa, CTR 0,30%).</li>
-      <li>As campanhas de <strong>Tráfego e Engajamento</strong> vão bem no objetivo delas: R$ 0,32/clique (CTR 2,25%) e R$ 0,026/engajamento. Atenção à frequência 3,04 do CPF1 — saturação acima de 4.</li>
-      <li><strong>Imbituba Rinomodelação</strong> e <strong>Floripa Preenchimento Labial</strong> gastaram ~R$ 110–175 para 1 conversa cada — revisar criativo/público.</li>
-    </ul>
-    <div class="twocol">
-      <div class="minibox">
-        <h4>🟢 Mais eficientes (custo/conversa)</h4>
-        <div class="item"><span>Combos · Floripa</span><strong>R$ 3,86</strong></div>
-        <div class="item"><span>Rinomodelação · Floripa</span><strong>R$ 9,33</strong></div>
-        <div class="item"><span>Bioestimulador · Floripa</span><strong>R$ 16,79</strong></div>
-      </div>
-      <div class="minibox">
-        <h4>🔴 Mais caros (custo/conversa)</h4>
-        <div class="item"><span>Rinomodelação · Imbituba</span><strong>R$ 174,67</strong></div>
-        <div class="item"><span>Preench. Labial · Floripa</span><strong>R$ 111,85</strong></div>
-        <div class="item"><span>Otomodelação · Arroio</span><strong>R$ 70,00</strong></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- INVESTIMENTO -->
-  <div class="invest">
-    <div>
-      <div style="font-size:13px;opacity:.9">Investimento total da semana (3 contas)</div>
-      <div class="big">R$ 3.492,12</div>
-    </div>
-    <div style="text-align:right;font-size:13px;opacity:.95">
-      Conversa: R$ 2.685,30 · 107 conversas<br>
-      Tráfego + Engajamento: R$ 806,82
-    </div>
-  </div>
-
-  <footer>Gerado pelo Performance Analyst · dados do Gerenciador da Meta · período 07–13/06/2026</footer>
+  <h2>🏥 Arroio <span class="badge">4 procedimentos</span></h2>
+  <div class="card"><table>
+    <thead><tr><th>Procedimento</th><th>Conversas</th><th>Custo/conv.</th><th>Valor usado</th><th>CTR</th><th>CPM</th></tr></thead>
+    <tbody><tr><td>Otomodelação</td><td>0</td><td><span class="pill r">∞ (0 conv.)</span></td><td>R$ 88,04</td><td>0.28%</td><td>R$ 11,13</td></tr><tr><td>Botox</td><td>3</td><td><span class="pill g">R$ 26,95</span></td><td>R$ 80,85</td><td>0.60%</td><td>R$ 22,21</td></tr><tr><td>Bioestimulador</td><td>1</td><td><span class="pill r">R$ 157,45</span></td><td>R$ 157,45</td><td>0.50%</td><td>R$ 25,56</td></tr><tr><td>Combos</td><td>2</td><td><span class="pill a">R$ 41,22</span></td><td>R$ 82,43</td><td>0.56%</td><td>R$ 17,13</td></tr></tbody>
+    <tfoot><tr><td>Total Arroio</td><td>6</td><td>R$ 68,13</td><td>R$ 408,77</td><td>0.45%</td><td>R$ 18,15</td></tr></tfoot>
+  </table></div>
+  <h2>🏥 Imbituba <span class="badge">5 procedimentos</span></h2>
+  <div class="card"><table>
+    <thead><tr><th>Procedimento</th><th>Conversas</th><th>Custo/conv.</th><th>Valor usado</th><th>CTR</th><th>CPM</th></tr></thead>
+    <tbody><tr><td>Otomodelação</td><td>3</td><td><span class="pill a">R$ 37,26</span></td><td>R$ 111,78</td><td>0.34%</td><td>R$ 11,99</td></tr><tr><td>Botox</td><td>5</td><td><span class="pill g">R$ 21,98</span></td><td>R$ 109,89</td><td>0.59%</td><td>R$ 36,17</td></tr><tr><td>Bioestimulador</td><td>3</td><td><span class="pill g">R$ 33,94</span></td><td>R$ 101,83</td><td>0.59%</td><td>R$ 29,87</td></tr><tr><td>Rinomodelação</td><td>0</td><td><span class="pill r">∞ (0 conv.)</span></td><td>R$ 108,04</td><td>0.24%</td><td>R$ 22,05</td></tr><tr><td>Combos</td><td>0</td><td><span class="pill r">∞ (0 conv.)</span></td><td>R$ 145,75</td><td>0.58%</td><td>R$ 25,72</td></tr></tbody>
+    <tfoot><tr><td>Total Imbituba</td><td>11</td><td>R$ 52,48</td><td>R$ 577,29</td><td>0.44%</td><td>R$ 21,92</td></tr></tfoot>
+  </table></div>
+  <div class="city-meta" style="margin-top:-8px"></div>
+  <h2>🏥 Florianópolis <span class="badge">7 procedimentos</span></h2>
+  <div class="card"><table>
+    <thead><tr><th>Procedimento</th><th>Conversas</th><th>Custo/conv.</th><th>Valor usado</th><th>CTR</th><th>CPM</th></tr></thead>
+    <tbody><tr><td>Otomodelação</td><td>7</td><td><span class="pill g">R$ 33,08</span></td><td>R$ 231,59</td><td>0.41%</td><td>R$ 20,29</td></tr><tr><td>Botox</td><td>5</td><td><span class="pill g">R$ 16,75</span></td><td>R$ 83,73</td><td>0.94%</td><td>R$ 46,44</td></tr><tr><td>Bioestimulador</td><td>1</td><td><span class="pill r">R$ 86,05</span></td><td>R$ 86,05</td><td>0.41%</td><td>R$ 58,74</td></tr><tr><td>Rinomodelação</td><td>2</td><td><span class="pill a">R$ 63,52</span></td><td>R$ 127,04</td><td>0.38%</td><td>R$ 48,27</td></tr><tr><td>Preenchimento Labial</td><td>0</td><td><span class="pill r">∞ (0 conv.)</span></td><td>R$ 63,71</td><td>0.26%</td><td>R$ 41,83</td></tr><tr><td>Combos</td><td>4</td><td><span class="pill g">R$ 29,85</span></td><td>R$ 119,38</td><td>0.71%</td><td>R$ 70,43</td></tr><tr><td>Outros (Neutro)</td><td>2</td><td><span class="pill g">R$ 23,96</span></td><td>R$ 47,92</td><td>0.43%</td><td>R$ 25,78</td></tr></tbody>
+    <tfoot><tr><td>Total Florianopolis</td><td>21</td><td>R$ 36,16</td><td>R$ 759,42</td><td>0.46%</td><td>R$ 33,91</td></tr></tfoot>
+  </table></div>
+  <h2>📣 Florianópolis — Tráfego &amp; Engajamento</h2>
+  <div class="city-meta">Campanhas com objetivo ≠ conversa. Medidas pela métrica certa de cada objetivo (não geram WhatsApp).</div>
+  <div class="branding-grid"><div class="bcard"><h3>📲 Tráfego / Visitas no Perfil</h3><div class="obj">Objetivo: Cliques no link · Posts + Perfil</div>
+    <div class="row"><span class="lbl">Cliques no link</span><span class="val">996</span></div>
+    <div class="row"><span class="lbl">Custo por clique</span><span class="val hl">R$ 0,30</span></div>
+    <div class="row"><span class="lbl">Alcance</span><span class="val">11.001</span></div>
+    <div class="row"><span class="lbl">CTR</span><span class="val">1.84%</span></div>
+    <div class="row"><span class="lbl">CPM</span><span class="val">R$ 5,49</span></div>
+    <div class="row"><span class="lbl">Valor usado</span><span class="val">R$ 296,90</span></div></div><div class="bcard"><h3>❤️ Engajamento na Publicação</h3><div class="obj">Objetivo: Engajamento · CPF1</div>
+    <div class="row"><span class="lbl">Engajamentos</span><span class="val">3.354</span></div>
+    <div class="row"><span class="lbl">Custo por engajamento</span><span class="val hl">R$ 0,06</span></div>
+    <div class="row"><span class="lbl">Visualizações de vídeo</span><span class="val">3.240</span></div>
+    <div class="row"><span class="lbl">Alcance / Frequência</span><span class="val">13.352 · 2.63</span></div>
+    <div class="row"><span class="lbl">CPM</span><span class="val">R$ 5,76</span></div>
+    <div class="row"><span class="lbl">Valor usado</span><span class="val">R$ 202,30</span></div></div></div>
+  <div class="reading"><h3>🔎 Leitura — Mês · 01–05/07</h3><ul>
+    <li><strong>Florianópolis</strong> é a conta mais eficiente (R$ 36,16/conversa); <strong>Arroio</strong> é o ponto mais fraco (R$ 68,13/conversa).</li>
+    <li>As campanhas de <strong>Tráfego e Engajamento</strong> de Floripa vão bem no objetivo delas — ~R$ 0,30/clique e ~R$ 0,06/engajamento.</li>
+    <li>⚠️ <strong>Zero conversa com verba relevante:</strong> Otomodelação · Arroio (R$ 88,04); Rinomodelação · Imbituba (R$ 108,04); Combos · Imbituba (R$ 145,75); Preenchimento Labial · Floripa (R$ 63,71) — revisar criativo/público ou pausar.</li>
+  </ul>
+  <div class="twocol">
+    <div class="minibox"><h4>🟢 Mais eficientes (custo/conversa)</h4><div class="item"><span>Botox · Floripa</span><strong>R$ 16,75</strong></div><div class="item"><span>Botox · Imbituba</span><strong>R$ 21,98</strong></div><div class="item"><span>Outros (Neutro) · Floripa</span><strong>R$ 23,96</strong></div></div>
+    <div class="minibox"><h4>🔴 Mais caros (custo/conversa)</h4><div class="item"><span>Bioestimulador · Arroio</span><strong>R$ 157,45</strong></div><div class="item"><span>Bioestimulador · Floripa</span><strong>R$ 86,05</strong></div><div class="item"><span>Rinomodelação · Floripa</span><strong>R$ 63,52</strong></div></div>
+  </div></div>
+  <div class="invest"><div><div style="font-size:13px;opacity:.9">Investimento total — Mês · 01–05/07 (3 contas)</div><div class="big">R$ 2.244,68</div></div>
+    <div style="text-align:right;font-size:13px;opacity:.95">Conversa: R$ 1.745,48 · 38 conversas<br>Tráfego + Engajamento: R$ 499,20</div></div>
+  </section>
+<footer>Gerado pelo Performance Analyst · dados do Gerenciador da Meta · 06/07/2026</footer>
 </div>
-</body>
-</html>
+<script>
+document.querySelectorAll('.tabbtn').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.tabbtn').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  document.getElementById('tab-'+b.dataset.tab).classList.add('active');
+}));
+document.getElementById('tab-7d').classList.add('active');
+</script>
+</body></html>
